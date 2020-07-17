@@ -8,12 +8,12 @@ import csv
 class GUI:
 
     def __init__(self, master):
-        window.title("Image Colorize Demo")
-        window.geometry('650x400')
+        window.title("Histogram Maker")
+        window.geometry('350x100')
         window["bg"] = "green"
         master["bg"] = "grey"
         # Label
-        self.lbl = Label(window, text="Select Image File:")
+        self.lbl = Label(window, text="Select CSV File:")
         self.lbl.grid(column=0, row=0)
         self.btn = Button(window, text=" Browse.. ", command=self.browse_file, bg="cyan")
         self.btn.grid(column=1, row=0)
@@ -44,11 +44,12 @@ class GUI:
         else:
             filename = filepath.split("/")[-1]
             print(filepath)
-            data=pd.read_csv('pipact.csv')
+            data=pd.read_csv(filepath)
             data['RSSI'].plot(kind='hist')
-            plt.show()
             plt.ylabel('Frequency')
             plt.xlabel('RSSI')
+            plt.title(filename)
+            plt.show()
 
 window = Tk()
 GUI(window)
